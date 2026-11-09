@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CRUD Estudantes</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+
+<main id="view-auth" class="auth" hidden>
+    <section class="card auth-card">
+        <h1>CRUD Estudantes</h1>
+
+        <div class="tabs">
+            <button type="button" class="tab active" data-tab="login">Entrar</button>
+            <button type="button" class="tab" data-tab="registro">Criar conta</button>
+        </div>
+
+        <form id="form-login" class="form">
+            <label>Login
+                <input name="login" required autocomplete="username">
+            </label>
+            <label>Senha
+                <input name="senha" type="password" required autocomplete="current-password">
+            </label>
+            <button class="btn primary" type="submit">Entrar</button>
+        </form>
+
+        <form id="form-registro" class="form" hidden>
+            <label>Nome
+                <input name="nome" required>
+            </label>
+            <label>Login
+                <input name="login" required autocomplete="username">
+            </label>
+            <label>Senha
+                <input name="senha" type="password" required autocomplete="new-password">
+                <small>Mínimo de 8 caracteres, com letra maiúscula, número e caractere especial.</small>
+            </label>
+            <button class="btn primary" type="submit">Criar conta</button>
+        </form>
+    </section>
+</main>
+
+
+<div id="view-app" hidden>
+    <header class="topbar">
+        <strong>CRUD Estudantes</strong>
+        <div class="topbar-right">
+            <span>Olá, <span id="usuario-nome"></span></span>
+            <button class="btn" id="btn-conta" type="button">Minha conta</button>
+            <button class="btn" id="btn-sair" type="button">Sair</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <div class="toolbar">
+                <form id="form-busca" class="search">
+                    <input id="busca-nome" type="search" placeholder="Buscar estudante por nome...">
+                    <button class="btn" type="submit">Buscar</button>
+                    <button class="btn" type="button" id="btn-limpar">Limpar</button>
+                </form>
+                <button class="btn primary" id="btn-novo" type="button">+ Novo estudante</button>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Idade</th>
+                        <th>Nascimento</th>
+                        <th>Alterado por</th>
+                        <th>Última alteração</th>
+                        <th class="col-acoes">Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tabela-estudantes"></tbody>
+                </table>
+            </div>
+            <p id="vazio" class="empty" hidden>Nenhum estudante encontrado.</p>
+        </section>
+    </main>
+</div>
+
+<dialog id="dlg-estudante">
+    <form id="form-estudante" class="form">
+        <h2 id="dlg-estudante-titulo">Novo estudante</h2>
+        <label>Nome
+            <input name="nome" required>
+        </label>
+        <label>CPF
+            <input name="cpf" required maxlength="14" inputmode="numeric">
+        </label>
+        <label>Data de nascimento
+            <input name="dataNascimento" type="date" required>
+        </label>
+        <div class="dialog-actions">
+            <button class="btn" type="button" data-close>Cancelar</button>
+            <button class="btn primary" type="submit">Salvar</button>
+        </div>
+    </form>
+</dialog>
+
+<dialog id="dlg-conta">
+    <form id="form-conta" class="form">
+        <h2>Minha conta</h2>
+        <label>Nome
+            <input name="nome" required>
+        </label>
+        <label>Login
+            <input name="login" required>
+        </label>
+        <label>Nova senha
+            <input name="senha" type="password" autocomplete="new-password" placeholder="Deixe em branco para manter a atual">
+        </label>
+        <div class="dialog-actions">
+            <button class="btn danger" type="button" id="btn-apagar-conta">Apagar conta</button>
+            <span class="spacer"></span>
+            <button class="btn" type="button" data-close>Cancelar</button>
+            <button class="btn primary" type="submit">Salvar</button>
+        </div>
+    </form>
+</dialog>
+
+<div id="toast" class="toast" hidden></div>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

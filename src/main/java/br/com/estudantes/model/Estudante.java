@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Estudantes")
@@ -18,6 +19,10 @@ public class Estudante {
     @ManyToOne(optional = false)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
+
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    @Column(name = "ultima_alteracao")
+    private LocalDateTime ultimaAlteracao;
 
     @Column(name = "nome")
     private String nome;
@@ -50,6 +55,7 @@ public class Estudante {
         return usuario;
     }
 
+    public LocalDateTime getUltimaAlteracao() { return ultimaAlteracao;}
     public String getNome() {
         return nome;
     }
@@ -73,6 +79,8 @@ public class Estudante {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public void setUltimaAlteracao(LocalDateTime ultimaAlteracao) { this.ultimaAlteracao = ultimaAlteracao; }
 
     public void setNome(String nome) {
         this.nome = nome;

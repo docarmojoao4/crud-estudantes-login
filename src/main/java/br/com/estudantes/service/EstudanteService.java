@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.List;
@@ -27,6 +28,7 @@ public class EstudanteService {
         estudante.setId(null);
         estudante.setIdade(calcularIdade(estudante.getDataNascimento()));
         estudante.setUsuario(usuario);
+        estudante.setUltimaAlteracao(LocalDateTime.now());
         return estudanteDAO.save(estudante);
     }
 
@@ -34,6 +36,7 @@ public class EstudanteService {
     public Estudante editar(Estudante estudante, Usuario usuario) {
         estudante.setIdade(calcularIdade(estudante.getDataNascimento()));
         estudante.setUsuario(usuario);
+        estudante.setUltimaAlteracao(LocalDateTime.now());
         return estudanteDAO.save(estudante);
     }
 
@@ -63,7 +66,7 @@ public class EstudanteService {
         return estudanteDAO.findAll();
     }
 
-    /** Regras que antes estavam duplicadas em cadastrar() e editar(). */
+
     private int calcularIdade(LocalDate dataNasc) {
         LocalDate hoje = LocalDate.now(ZoneId.of("America/Sao_Paulo"));
         if (dataNasc.isAfter(hoje)) {

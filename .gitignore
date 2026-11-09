@@ -7,5 +7,5 @@ target/
 
 *.log
 
-.env
+.envs
 application-local.properties
